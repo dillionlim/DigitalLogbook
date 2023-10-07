@@ -53,7 +53,7 @@ Add your telegram bot to your group chat.
 
 First, in `kv_namespaces`, insert your KV namespace ID from above.
 
-Next, `chatId1` and `chatId2` are the Telegram chat IDs of the unfiltered and filtered chats respectively.
+Next, `chatId1` and `chatId2` are the Telegram chat IDs of the unfiltered and filtered chats respectively. `channelId1` and `channelId2` are the channel IDs of the unfiltered and filtered chats respectively.
 
 The `POST_URI` parameter contains the URI of the worker, which should be of the form "https://digital-logbook.[domain-name].workers.dev/submissions".
 
