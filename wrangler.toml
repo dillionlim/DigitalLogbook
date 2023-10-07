@@ -15,6 +15,8 @@ crons = [ ]
 
 chatId1 = "#TODO: Include chatID1 here, this is the unfiltered chat"
 chatId2 = "#TODO: Include chatID2 here, this is the filtered chat"
+channelId1 = "#TODO: Include channelId1 here, this is the unfiltered chat ID"
+channelId2 = "#TODO: Include channelId2 here, this is the filtered chat ID"
 POST_URI = "#TODO: Include your POST_URI here, this is where your server is hosted"
 HAS_ATTACHMENTS = false
 openaccessset = [#TODO: Include the question numbers you want to include in the filtered chat here]
