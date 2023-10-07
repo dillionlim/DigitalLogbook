@@ -29,7 +29,6 @@ async function handleRequest(request) {
       : formsg.crypto.decrypt(formSecretKey, body.data);
 
     if (submission) {
-      //await sendMessageToTelegramBot("Processing Message",chatId1);
       const formResponses = submission.responses;
       const messages = [];
       const filteredmessages = [];
@@ -66,27 +65,27 @@ async function handleRequest(request) {
       }
       var message = messages.join('<pre>\n</pre>');
       var filteredmessage = filteredmessages.join('<pre>\n</pre>');
-      await sendMessageToTelegramBot(message, chatId1);
-      await sendMessageToTelegramBot(filteredmessage, chatId2);
+      await sendMessageToTelegramBot(message, chatId1, channelId1);
+      await sendMessageToTelegramBot(filteredmessage, chatId2, channelId2);
       console.log("Submitted!");
       return new Response('Form submission processed successfully', { status: 200 });
     } else {
-      await sendMessageToTelegramBot("Error 400: Failed to decrypt form submission. Contact the System Administrator if this error persists.", chatId1);
+      await sendMessageToTelegramBot("Error 400: Failed to decrypt form submission. Contact the System Administrator if this error persists.", chatId1, channelId1);
       console.log('Failed to decrypt submission');
       return new Response('Failed to decrypt form submission', { status: 400 });
     }
   } else {
     if (request.method === "POST")
-      await sendMessageToTelegramBot("Error 404: Does not end with /submissions. Check the webhook URL to ensure that it ends with /submissions.",chatId1);
+      await sendMessageToTelegramBot("Error 404: Does not end with /submissions. Check the webhook URL to ensure that it ends with /submissions.",chatId1, channelId1);
     else
       console.log("Error: This is not a POST message. Please send a post message.");
     return new Response("Not found", { status: 404 });
   }
 }
 
-async function sendMessageToTelegramBot(message, chatId) {
+async function sendMessageToTelegramBot(message, chatId, threadId) {
   console.log("Sending message");
-  const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(message)}&message_thread_id=2`;
+  const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(message)}&message_thread_id=${threadId}`;
   const response = await fetch(url, {
     headers: {
       'Content-Type': 'application/json'
